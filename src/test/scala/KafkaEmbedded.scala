@@ -1,3 +1,20 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import java.io.{File, IOException}
 import java.util.Properties
 
@@ -14,6 +31,7 @@ import org.slf4j.{Logger, LoggerFactory}
 class KafkaEmbedded(config: Properties) {
   private val log: Logger = LoggerFactory.getLogger(this.getClass)
 
+  // some default settings
   private val DEFAULT_ZK_CONNECT = "127.0.0.1:2181"
   private val DEFAULT_ZK_SESSION_TIMEOUT_MS = 10 * 1000
   private val DEFAULT_ZK_CONNECTION_TIMEOUT_MS = 8 * 1000
@@ -32,6 +50,7 @@ class KafkaEmbedded(config: Properties) {
   def brokerList: String = String.join(":",
     kafka.config.hostName, Integer.toString(kafka.boundPort(ListenerName.forSecurityProtocol(SecurityProtocol.PLAINTEXT))))
 
+  // stop the kafka and clean up the temp folder
   def stop(): Unit = {
     log.debug(s"Shutting down embedded Kafka broker at $brokerList (with ZK ensemble at $zookeeperConnect) ...")
     kafka.shutdown
@@ -41,14 +60,17 @@ class KafkaEmbedded(config: Properties) {
     log.debug(s"Shutdown of embedded Kafka broker at $brokerList completed (with ZK ensemble at $zookeeperConnect) ...")
   }
 
+  // create a topic
   def createTopic(topic: String): Unit = {
     createTopic(topic, 1, 1, new Properties())
   }
 
+  // create a topic
   def createTopic(topic: String, partitions: Int, replication: Int): Unit = {
     createTopic(topic, partitions, replication, new Properties())
   }
 
+  // create a topic
   def createTopic(topic: String, partitions: Int, replication: Int, topicConfig: Properties): Unit = {
     log.debug(s"Creating topic { name: $topic, partitions: $partitions, replication: $replication, config: $topicConfig }")
     val kafkaZkClient = createZkClient
@@ -57,6 +79,7 @@ class KafkaEmbedded(config: Properties) {
     kafkaZkClient.close()
   }
 
+  // delete the topic
   def deleteTopic(topic: String): Unit = {
     log.debug(s"Deleting topic { name: {$topic} }")
     val kafkaZkClient = createZkClient
@@ -65,6 +88,7 @@ class KafkaEmbedded(config: Properties) {
     kafkaZkClient.close()
   }
 
+  // create zookeeper client
   private def createZkClient = KafkaZkClient.apply(zookeeperConnect, isSecure = false, DEFAULT_ZK_SESSION_TIMEOUT_MS,
     DEFAULT_ZK_CONNECTION_TIMEOUT_MS, Integer.MAX_VALUE, Time.SYSTEM, "testMetricGroup", "testMetricType")
 
