@@ -61,9 +61,9 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="334">
-                <caret line="33" column="99" selection-start-line="33" selection-start-column="99" selection-end-line="33" selection-end-column="99" />
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="394">
+                <caret line="39" column="283" selection-start-line="39" selection-start-column="283" selection-end-line="39" selection-end-column="283" />
               </first_editor>
               <second_editor />
             </state>
@@ -85,6 +85,7 @@
       <find>Error</find>
       <find>Deleting top</find>
       <find>DEFAULT_ZK_CONNECTION_TIMEOUT_MS</find>
+      <find>Kafka</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -585,9 +586,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="334">
-            <caret line="33" column="99" selection-start-line="33" selection-start-column="99" selection-end-line="33" selection-end-column="99" />
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="394">
+            <caret line="39" column="283" selection-start-line="39" selection-start-column="283" selection-end-line="39" selection-end-column="283" />
           </first_editor>
           <second_editor />
         </state>
