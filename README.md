@@ -19,7 +19,10 @@ The Kafka cluster usually includes a few components:
 - Producers: Which publish data to the topics of their choice;
 - Consumers: Which read data from the cluster;
 
-Starting Zookeeper
+![Kafka Cluster](resources/kafka_cluster.png)
+
+## Starting Zookeeper
+
 Zookeeper is the service that stores key-value to maintain server state. Kafka relies on Zookeeper to run, so the first task is to start a Zookeeper instance.
 
 By leveraging another Apache project – Apache Curator, we can start a TestingServer provided by Curator. From its Javadoc, we should notice that TestingServer is FOR TESTING PURPOSES ONLY, but it will fit our need at this moment.
@@ -28,18 +31,20 @@ By creating an instance of TestingServer, we can easily make Zookeeper running e
 
 Because certain version of Apache Curator only works with certain version of Zookeeper, you have to make sure you are using the proper version of Apache Curator. You can find the documentation of version compatibility here:
 
-https://curator.apache.org/zk-compatibility.html
+[https://curator.apache.org/zk-compatibility.html](https://curator.apache.org/zk-compatibility.html)
 
-Starting Kafka
+## Starting Kafka
+
 Before we start Kafka server, we need to set up a minimum of configuration properties in order to run it, that includes host name, port, etc.
 
 Kafka Test provides a very useful TestUtils class, which we can simply use it to create a Kafka server. Please note that usually you won’t be able to find Kafka Test in your release package, but for testing purpose, you can add it in by turning on the <classifier>test</classifier> in your pom.xml file.
 
 With Kafka server running on your local machine in the embedded mode, you can start writing the codes to create topic and put some data into that. Later on, you can also stop the server and do some cleanup.
 
-Conclusion
+## Conclusion
+
 Developers usually have to set a cluster to test out Apache Kafka and program the down-stream applications. By leveraging some other open source project and test utilities, we can avoid downloading and installing those components, thus speed up the development process and let us focus more on the applications.
 
 All the codes can be found in my GitHub, here is the link:
 
-https://github.com/bomeng/embedded_kafka
+[https://github.com/bomeng/embedded_kafka](https://github.com/bomeng/embedded_kafka)
